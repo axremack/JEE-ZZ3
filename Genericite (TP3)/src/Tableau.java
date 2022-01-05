@@ -1,6 +1,6 @@
 public class Tableau {
     public Object [] tab;
-    private static int capacite = 1;
+    private int capacite = 1;
     private int taille;
 
     public Tableau() {
@@ -14,7 +14,7 @@ public class Tableau {
         taille = 0;
     }
 
-    public static int getCapacite() {
+    public int getCapacite() {
         return capacite;
     }
 
@@ -43,7 +43,7 @@ public class Tableau {
     }
 
     public Object getElementAt(int i) throws MyArrayOutOfBoundsException {
-        if (i <= taille) {
+        if (i < taille && i >= 0) {
             return tab[i];
         } else {
             throw new MyArrayOutOfBoundsException("Indice invalide");
