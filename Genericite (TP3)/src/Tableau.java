@@ -1,16 +1,16 @@
-public class Tableau {
-    public Object [] tab;
+public class Tableau<T> {
+    public T [] tab;
     private int capacite = 1;
     private int taille;
 
     public Tableau() {
-        this.tab = new Object[capacite];
+        this.tab = (T[]) new Object[capacite];
         taille = 0;
     }
 
     public Tableau(int i) {
         capacite = i;
-        this.tab = new Object[capacite];
+        this.tab = (T[]) new Object[capacite];
         taille = 0;
     }
 
@@ -24,7 +24,7 @@ public class Tableau {
 
     private void agrandir() throws OutOfMemoryError {
         capacite = capacite * 2;
-        Object[] t = new Object[capacite];
+        T[] t = (T[]) new Object[capacite];
         if(t != null) {
             System.arraycopy(tab, 0, t, 0, taille);
             tab = t;
@@ -33,7 +33,7 @@ public class Tableau {
         }
     }
 
-    public void addElement(Object o) throws OutOfMemoryError {
+    public void addElement(T o) throws OutOfMemoryError {
         if (taille == capacite) {
             agrandir();
         }

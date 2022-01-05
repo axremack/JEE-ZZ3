@@ -2,16 +2,15 @@ import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
 public class TableauTest {
-    Tableau t;
+    Tableau<Integer> t;
 
     @Before
     public void initialisation() {
-        t = new Tableau();
+        t = new Tableau<Integer>();
         assertNotNull("@Before en échec", t);
     }
 
@@ -70,20 +69,13 @@ public class TableauTest {
         testAccesElements1();
         t.getElementAt(4);
     }
-/*
-    @Test(expected=MyArrayOutOfBoundsException.class)
-    public void testExceptionPourIncredule() throws Exception {
-        // evidemment ce test est toujours FAUX
-        throw new OutOfMemoryError();
-    }
-*/
+
     @Test(expected=OutOfMemoryError.class)
-    //@Ignore
     public void testAgrandirException() throws Exception  {
         t = new Tableau(Integer.MAX_VALUE);
         try {
             while (true) {
-                t.addElement(new Double(Math.random()));
+                t.addElement(new Integer((int)Math.random()));
                 //System.out.println(t.getTaille());
             }
         }  catch(Exception e) {
