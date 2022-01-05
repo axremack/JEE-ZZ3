@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String [] args) {
-        Tableau t = new Tableau();
+        /*Tableau t = new Tableau();
 
         System.out.println(t.getTaille());
         System.out.println(t.getCapacite());
@@ -22,21 +22,21 @@ public class Main {
 
         System.out.println(t);
         System.out.println();
-
+        */
         // Vraie appli
-        Tableau tab = new Tableau();
-        for (int i = 1; i <=3; i++) {
-            tab.addElement(i);
+        Tableau<String> tab = new Tableau<String>();
+        for (Integer i = 1; i <=3; i++) {
+            tab.addElement(i.toString());
         }
 
-        Integer sum = 0;
+        /*Integer sum = 0;
         for (Object o : tab.tab) {
-            if (o instanceof Integer) {
-                sum += (Integer)o;
+            if (o instanceof String) {
+                sum += (String)o;
             }
-        }
+        }*/
 
-        System.out.println(sum);
+        System.out.println(tab);
 
 
 

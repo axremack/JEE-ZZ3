@@ -1,16 +1,18 @@
-public class Tableau<T> {
+import java.util.Arrays;
+
+public class Tableau<T extends Comparable<T>> {
     public T [] tab;
     private int capacite = 1;
     private int taille;
 
     public Tableau() {
-        this.tab = (T[]) new Object[capacite];
+        this.tab = (T[]) new Comparable[capacite];
         taille = 0;
     }
 
     public Tableau(int i) {
         capacite = i;
-        this.tab = (T[]) new Object[capacite];
+        this.tab = (T[]) new Comparable[capacite];
         taille = 0;
     }
 
@@ -24,7 +26,7 @@ public class Tableau<T> {
 
     private void agrandir() throws OutOfMemoryError {
         capacite = capacite * 2;
-        T[] t = (T[]) new Object[capacite];
+        T[] t = (T[]) new Comparable[capacite];
         if(t != null) {
             System.arraycopy(tab, 0, t, 0, taille);
             tab = t;
@@ -39,6 +41,7 @@ public class Tableau<T> {
         }
 
         tab[taille] = o;
+        Arrays.sort(tab);
         taille++;
     }
 
@@ -51,8 +54,16 @@ public class Tableau<T> {
     }
 
     public String toString() {
-        String res = "classe : " + this.getClass().getName() + " - hashcode : " + this.hashCode() + " - taille : " + taille + " - capacite : " + capacite;
-        return res;
-    }
+        StringBuilder res = new StringBuilder();
+        res.append("classe : " + this.getClass().getName())
+                .append(" - hashcode : " + this.hashCode())
+                .append(" - taille : " + taille)
+                .append(" - capacite : " + capacite + "\n")
+                .append("contenu :\n\t");
 
+        for (int i = 0; i < taille; i++) {
+            res.append(tab[i] + "  ");
+        }
+        return res.toString();
+    }
 }
