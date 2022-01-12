@@ -1,3 +1,5 @@
+package Partie_1;
+
 public class Personne {
     public String nom;
 
