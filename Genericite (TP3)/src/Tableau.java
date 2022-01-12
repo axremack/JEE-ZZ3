@@ -41,7 +41,7 @@ public class Tableau<T extends Comparable<T>> {
         }
 
         tab[taille] = o;
-        Arrays.sort(tab);
+        Arrays.sort(tab, 0, taille + 1);
         taille++;
     }
 

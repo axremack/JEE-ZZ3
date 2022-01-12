@@ -25,9 +25,10 @@ public class Main {
         */
         // Vraie appli
         Tableau<String> tab = new Tableau<String>();
-        for (Integer i = 1; i <=3; i++) {
+        for (Integer i = 3; i >=1; i--) {
             tab.addElement(i.toString());
         }
+
 
         /*Integer sum = 0;
         for (Object o : tab.tab) {
