@@ -14,6 +14,10 @@ public class SimpleServlet extends HttpServlet   {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
         doGet(request,response);
+
+        // To see if post is working
+        PrintWriter out = response.getWriter();
+        out.println(" post");
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
