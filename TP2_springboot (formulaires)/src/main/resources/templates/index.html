@@ -9,16 +9,20 @@
 <body>
 <div id="content">
     <div id="bigBubble">
-        <p id="text">Je pense à un nombre entre 1 et 100. Pouvez-vous le trouver ?</p>
+        <p id="text" th:utext="${devinette.message}"></p>
         <div id="mediumBubble"></div>
         <div id="smallBubble"></div>
     </div>
 
     <img id="tete" src="/images/loic.png" alt="tete du loic">
-    <form id="pro_form" method="POST" action="/">
-        <p><input name="valider" type="text" size="2">
-            <input type="submit" value="Ok"></p>
-        <p><input name="nouveau" type="submit" value="Recommencer" > <p>
+
+    <form id="pro_form" method="post" th:object="${devinette}" th:action="@{/}">
+        <p><input type="text" size="2" th:field="${devinette.proposition}">
+            <input name="valider" type="submit" value="Ok"></p>
+        <p><input name="nouveau" type="submit" value="Recommencer"></p>
+        <ul th:if="${#fields.hasErrors('*')}">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+        </ul>
     </form>
 </div>
 </body>
