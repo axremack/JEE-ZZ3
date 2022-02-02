@@ -7,9 +7,15 @@
 </head>
 
 <body>
+<p style="text-align:right;font-size:90%">
+    <span th:if="${!#strings.equals(#locale, 'fr')}"><a href="javascript:change('fr')">Français</a> </span>
+    <span th:if="${!#strings.equals(#locale, 'en')}"><a href="javascript:change('en')">English</a> </span>
+    <span th:if="${!#strings.equals(#locale, 'pt')}"><a href="javascript:change('pt')">Português</a></span>
+</p>
+
 <div id="content">
     <div id="bigBubble">
-        <p id="text" th:utext="${devinette.message}"></p>
+        <p id="text" th:utext=#{intro}></p>
         <div id="mediumBubble"></div>
         <div id="smallBubble"></div>
     </div>
@@ -18,12 +24,29 @@
 
     <form id="pro_form" method="post" th:object="${devinette}" th:action="@{/}">
         <p><input type="text" size="2" th:field="${devinette.proposition}">
-            <input name="valider" type="submit" value="Ok"></p>
-        <p><input name="nouveau" type="submit" value="Recommencer"></p>
+            <input name="valider" type="submit" th:value=#{ok}></p>
+        <p><input name="nouveau" type="submit" th:value=#{restart}></p>
         <ul th:if="${#fields.hasErrors('*')}">
             <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
         </ul>
     </form>
+
+    <div>
+        <p th:if="${devinette.proposition > devinette.nombre}" th:text=#{greater}></p>
+        <p th:if="${devinette.proposition < devinette.nombre}" th:text=#{less}></p>
+    </div>
+
 </div>
 </body>
 </html>
+
+<script>
+  function change(l) {
+    var parsedUrl = new URL(window.location.href);
+    // ajoute ou change l'attribut "lang"
+    parsedUrl.searchParams.set("lang", l);
+    // permet de recharger la page
+    window.location = parsedUrl.href;
+    return false;
+  }
+</script>
