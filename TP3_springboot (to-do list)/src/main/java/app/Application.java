@@ -30,11 +30,12 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         List<String> list = Arrays.asList(strings);
         if (list.contains("install")) {
+            jdbcTemplate.execute("DROP TABLE notes IF EXISTS");
             jdbcTemplate.execute("DROP TABLE categories IF EXISTS");
             jdbcTemplate.execute(
                     "CREATE TABLE categories ("+
                             "category_id IDENTITY PRIMARY KEY," +
-                            "name VARCHAR(20) DEFAULT '' "+
+                            "name VARCHAR(20) DEFAULT '' " +
                             ");" );
             log.info("categories TABLE CREATED");
 
@@ -43,7 +44,6 @@ public class Application implements CommandLineRunner {
             jdbcTemplate.update("INSERT INTO categories(name) values('done'); ");
             log.info("categories TABLE POPULATED");
 
-            jdbcTemplate.execute("DROP TABLE notes IF EXISTS");
             jdbcTemplate.execute(
                     "CREATE TABLE notes (" +
                             "   note_id       IDENTITY PRIMARY KEY," +
@@ -67,20 +67,31 @@ public class Application implements CommandLineRunner {
             String sql = "select * from categories";
             categories = jdbcTemplate.query(sql,
                     (rs, rowNum) ->
-                    { return new String (rs.getString("name") );
+                    {
+                        return new String(rs.getString("name"));
                     }
             );
             log.info(categories.toString());
+        }
 
-            if (list.contains("testNotes")) {
-                sql = "SELECT * FROM notes";
-                List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+        if (list.contains("testNotes")) {
+            List<String> categories;
+            String sql = "select * from categories";
 
-                for (Map row : rows) {
-                    log.info(row.get("content").toString());
-                    log.info(categories.get((Integer)row.get("category")-1));
-                }
+            categories = jdbcTemplate.query(sql,
+                    (rs, rowNum) ->
+                    {
+                        return new String(rs.getString("name"));
+                    }
+            );
+
+            sql = "SELECT * FROM notes";
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+
+            for (Map row : rows) {
+                log.info(row.get("content").toString() + " (" + categories.get((Integer)row.get("category")-1) + ")");
             }
+
         }
 
 
