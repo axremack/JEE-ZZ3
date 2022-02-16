@@ -10,16 +10,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Entity
-@Table(name="notes")
-public class PostIt {
+@Table(name="tasks")
+public class Task {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="note_id")
+    @Column(name="task_id")
     private Long   id;
 
     @ManyToOne
@@ -30,11 +31,12 @@ public class PostIt {
     @CreationTimestamp
     private Date   creationDate;
     @Column(name="end_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date   endDate;
 
-    protected PostIt() {}
+    protected Task() {}
 
-    public PostIt(Category category, String content ) {
+    public Task(Category category, String content ) {
         this.category = category;
         this.content  = content;
         //this.creationDate     = new Date();
@@ -43,7 +45,7 @@ public class PostIt {
     @Override
     public String toString() {
         return String.format(
-                "PostIt[id=%d, content='%s']", id, content);
+                "Task[id=%d, content='%s']", id, content);
     }
 
     public Long getId() {
@@ -63,5 +65,25 @@ public class PostIt {
     }
     public String getContent() {
         return content;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

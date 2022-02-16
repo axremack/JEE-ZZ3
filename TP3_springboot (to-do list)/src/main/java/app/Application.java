@@ -30,11 +30,11 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         List<String> list = Arrays.asList(strings);
         if (list.contains("install")) {
-            jdbcTemplate.execute("DROP TABLE notes IF EXISTS");
+            jdbcTemplate.execute("DROP TABLE tasks IF EXISTS");
             jdbcTemplate.execute("DROP TABLE categories IF EXISTS");
             jdbcTemplate.execute(
                     "CREATE TABLE categories ("+
-                            "category_id IDENTITY PRIMARY KEY," +
+                            "category_id IDENTITY PRIMARY KEY AUTO_INCREMENT," +
                             "name VARCHAR(20) DEFAULT '' " +
                             ");" );
             log.info("categories TABLE CREATED");
@@ -45,21 +45,21 @@ public class Application implements CommandLineRunner {
             log.info("categories TABLE POPULATED");
 
             jdbcTemplate.execute(
-                    "CREATE TABLE notes (" +
-                            "   note_id       IDENTITY PRIMARY KEY," +
+                    "CREATE TABLE tasks (" +
+                            "   task_id       IDENTITY PRIMARY KEY AUTO_INCREMENT," +
                             "   category      INTEGER NOT NULL," +
                             "   content       VARCHAR(500) NOT NULL," +
                             "   creation_date DATE DEFAULT TODAY(), " +
                             "   end_date      DATE DEFAULT NULL, " +
                             "   FOREIGN KEY(category) REFERENCES categories(category_id)"+
                             ");");
-            log.info("categories TABLE CREATED");
+            log.info("tasks TABLE CREATED");
 
-            jdbcTemplate.update("INSERT INTO notes (category, content) values(3, 'finir le tp 1'); ");
-            jdbcTemplate.update("INSERT INTO notes (category, content) values(2, 'finir le tp 2'); ");
-            jdbcTemplate.update("INSERT INTO notes (category, content) values(1, 'finir le tp 3'); ");
-            jdbcTemplate.update("INSERT INTO notes (category, content) values(1, 'finir le tp 3'); ");
-            log.info("categories TABLE POPULATED");
+            jdbcTemplate.update("INSERT INTO tasks (category, content) values(3, 'finir le tp 1'); ");
+            jdbcTemplate.update("INSERT INTO tasks (category, content) values(2, 'finir le tp 2'); ");
+            jdbcTemplate.update("INSERT INTO tasks (category, content) values(1, 'finir le tp 3'); ");
+            jdbcTemplate.update("INSERT INTO tasks (category, content) values(1, 'finir le tp 3'); ");
+            log.info("tasks TABLE POPULATED");
         }
 
         if (list.contains("testCat")) {
@@ -74,7 +74,7 @@ public class Application implements CommandLineRunner {
             log.info(categories.toString());
         }
 
-        if (list.contains("testNotes")) {
+        if (list.contains("testTask")) {
             List<String> categories;
             String sql = "select * from categories";
 
@@ -85,7 +85,7 @@ public class Application implements CommandLineRunner {
                     }
             );
 
-            sql = "SELECT * FROM notes";
+            sql = "SELECT * FROM tasks";
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
 
             for (Map row : rows) {

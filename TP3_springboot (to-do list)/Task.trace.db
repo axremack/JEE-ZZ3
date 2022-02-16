@@ -1,0 +1,58 @@
+2022-02-16 10:42:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "NOTES" non trouvée
+Table "NOTES" not found; SQL statement:
+select postit0_.note_id as note_id1_1_, postit0_.category as category5_1_, postit0_.content as content2_1_, postit0_.creation_date as creation3_1_, postit0_.end_date as end_date4_1_ from notes postit0_ [42102-200]
+2022-02-16 10:48:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TASKS" non trouvée
+Table "TASKS" not found; SQL statement:
+select task0_.task_id as task_id1_1_, task0_.category as category5_1_, task0_.content as content2_1_, task0_.creation_date as creation3_1_, task0_.end_date as end_date4_1_ from tasks task0_ [42102-200]
+2022-02-16 10:50:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Impossible de supprimer "CATEGORIES" car "CONSTRAINT_4B" dépend de lui
+Cannot drop "CATEGORIES" because "CONSTRAINT_4B" depends on it; SQL statement:
+DROP TABLE categories IF EXISTS [90107-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:576)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:98)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:422)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:381)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:431)
+	at app.Application.run(Application.java:34)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:769)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:753)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:309)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at app.Application.main(Application.java:26)
+2022-02-16 11:38:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Impossible de supprimer "CATEGORIES" car "CONSTRAINT_4B" dépend de lui
+Cannot drop "CATEGORIES" because "CONSTRAINT_4B" depends on it; SQL statement:
+DROP TABLE categories IF EXISTS [90107-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:576)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:98)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:422)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:381)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:431)
+	at app.Application.run(Application.java:34)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:769)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:753)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:309)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at app.Application.main(Application.java:26)
