@@ -29,6 +29,7 @@ public class Task {
     private String content;
     @Column(name="creation_date")
     @CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date   creationDate;
     @Column(name="end_date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
