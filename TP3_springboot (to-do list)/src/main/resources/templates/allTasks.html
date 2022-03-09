@@ -13,13 +13,11 @@
 <div id="main" th:unless="${categories.isEmpty()}">
     <div class="zone" th:each="cat: ${categories}">
         <h2 th:text="${cat.name}"></h2>
-        <div class="task" th:each="task: ${tasks}">
-            <p th:text="${task.id}"></p>
-            <p th:text="${task.category.name}"></p>
+        <div class="task" th:each="task: ${tasks}" th:if="${task.category.name} == ${cat.name}">
+            <p><a th:href="@{/tasks/{id}(id=${task.id})}">Voir le détail</a></p>
             <p th:text="${task.content}"></p>
             <p th:text="${task.creationDate}"></p>
             <p th:text="${task.endDate}"></p>
-            <p><a th:href="@{/tasks/{id}(id=${task.id})}">Voir le détail</a></p>
         </div>
     </div>
 </div>
